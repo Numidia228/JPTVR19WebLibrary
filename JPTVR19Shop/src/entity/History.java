@@ -31,7 +31,7 @@ public class History implements Serializable{
         return product;
     }
 
-    public void setBook(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
@@ -39,7 +39,7 @@ public class History implements Serializable{
         return customer;
     }
 
-    public void setReader(Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 

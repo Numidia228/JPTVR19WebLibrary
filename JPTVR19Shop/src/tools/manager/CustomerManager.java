@@ -4,9 +4,12 @@ import entity.Customer;
 import java.util.Scanner;
 
 public class CustomerManager {
+
+
     public Customer createCustomer() {
         Scanner scanner = new Scanner(System.in);
         Customer customer = new Customer();
+        System.out.println();
         System.out.println("--- Регистрация нового пользователя ---");
         System.out.print("Введите имя: ");
         customer.setFirstname(scanner.nextLine());
@@ -16,7 +19,7 @@ public class CustomerManager {
         customer.setPhone(scanner.nextLine());
         System.out.print("Введите адрес: ");
         customer.setAddress(scanner.nextLine());
-        this.printCustomer(customer);
+        System.out.println();
         return customer;
     }
 
@@ -29,20 +32,11 @@ public class CustomerManager {
         }
     }
 
-    public void printCustomer(Customer customer) {
-        System.out.println("Добавлен читатель: "
-                + customer.getFirstname()
-                + " "
-                + customer.getLastname()
-        );
-    }
-
-    public void printListCustomers(Customer[] readers) {
-        for (int i = 0; i < readers.length; i++) {
-            if(readers[i] != null){
-                System.out.println(i+1+". " + readers[i].toString());
+    public static void printListCustomers(Customer[] customers) {
+        for (int i = 0; i < customers.length; i++) {
+            if(customers[i] != null){
+                System.out.println(i+1+". " + customers[i].toString());
             }
         }
     }
-
 }

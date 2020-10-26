@@ -1,117 +1,47 @@
 package com.company;
 
-import entity.Customer;
-import entity.History;
-import entity.Product;
-import tools.manager.CustomerManager;
+import tools.saver.HistorySaver;
 import tools.manager.HistoryManager;
+import tools.saver.ProductSaver;
+import tools.manager.HistoryManager;
+import entity.Product;
+import entity.History;
+import entity.Customer;
+import entity.User;
+import java.util.Scanner;
+import security.SecureManager;
 import tools.manager.ProductManager;
 import tools.saver.CustomerSaver;
-import tools.saver.HistorySaver;
-import tools.saver.ProductSaver;
+import tools.saver.UserSaver;
+import ui.ManagerUI;
 
-import java.util.Scanner;
-
-class App {
-    private Product[] products = new Product[10];
+public class App {
+    private Product[] products = new Product[100];
     private Customer[] customers = new Customer[10];
     private History[] histories = new History[10];
-    private ProductManager productManager = new ProductManager();
-    private CustomerManager customerManager = new CustomerManager();
-    private HistoryManager historyManager = new HistoryManager();
+    private User[] users = new User[10];
+
     private ProductSaver productSaver = new ProductSaver();
     private CustomerSaver customerSaver = new CustomerSaver();
     private HistorySaver historySaver = new HistorySaver();
+    private SecureManager secureManager = new SecureManager();
+    private UserSaver userSaver = new UserSaver();
+
+    public static User loginedUser;
 
     public App() {
-        products = ProductSaver.loadProducts();
+        products = productSaver.loadProducts();
+        customers = customerSaver.loadCustomers();
+        histories = historySaver.loadHistories();
+        users = userSaver.loadUsers();
     }
 
-    public void run() {
-        System.out.println("============================================");
-        System.out.println("LapShop | магазин ноутбуков");
-        System.out.println("============================================");
-        System.out.println();
+    public void run(){
         boolean repeat = true;
-        Scanner scanner = new Scanner(System.in);
-        do {
-            System.out.println();
-            System.out.println("Выберите программу: ");
-            System.out.println();
-            System.out.println("0. Выйти из программы");
-            System.out.println("1. Добавить товар");
-            System.out.println("2. Список товаров");
-            System.out.println("3. Добавить пользователя");
-            System.out.println("4. Список пользователей");
-            System.out.println("5. Купить товар");
-            System.out.print("Выберите задачу: ");
-            String task = scanner.nextLine();
-            switch (task) {
-                case "0":
-                    System.out.println();
-                    System.out.println("--------------------------------");
-                    System.out.println("Выбрана задача: 0. Выйти из программы");
-                    System.out.println("--------------------------------");
-                    System.out.println();
-                    System.out.println("--- Конец программы ---");
-                    break;
-                case "1":
-                    System.out.println();
-                    System.out.println("--------------------------------");
-                    System.out.println("Выбрана задача: 1. Добавить товар");
-                    System.out.println("--------------------------------");
+        System.out.println("--- Библиотека ---");
+        this.loginedUser = secureManager.checkTask(users, customers);
+        ManagerUI managerUI = new ManagerUI();
+        managerUI.getManagerUI(customers, users, products, histories);
 
-                    Product product = ProductManager.createProduct();
-                    productManager.addProductToArray(product, products);
-                    ProductSaver.saveProducts(products);
-
-                    System.out.println();
-                    break;
-                case "2":
-                    System.out.println();
-                    System.out.println("--------------------------------");
-                    System.out.println("Выбрана задача: 2. Список товаров");
-                    System.out.println("--------------------------------");
-
-                    productManager.printListProducts(products);
-
-                    System.out.println();
-                    break;
-                case "3":
-                    System.out.println();
-                    System.out.println("--------------------------------");
-                    System.out.println("Выбрана задача: 3. Добавить пользователя");
-                    System.out.println("--------------------------------");
-
-                    Customer customer = customerManager.createCustomer();
-                    customerManager.addCustomerToArray(customer, customers);
-                    customerSaver.saveReaders(customers);
-
-                    System.out.println();
-                    break;
-                case "4":
-                    System.out.println();
-                    System.out.println("--------------------------------");
-                    System.out.println("Выбрана задача: 4. Список пользователей");
-                    System.out.println("--------------------------------");
-                    System.out.println();
-
-                    customerManager.printListCustomers(customers);
-
-                    break;
-                case "5":
-                    System.out.println();
-                    System.out.println("--------------------------------");
-                    System.out.println("Выбрана задача: 5. Купить товар");
-                    System.out.println("--------------------------------");
-
-                    History history = historyManager.takeOnProduct(products, customers);
-                    historyManager.addHistoryToArray(history,histories);
-                    historySaver.saveHistories(histories);
-
-                    System.out.println();
-                    break;
-            }
-        } while(repeat);
     }
 }

@@ -28,12 +28,11 @@ public class ProductManager {
         }
     }
 
-    public void printListProducts(Product[] books) {
-        for (int i = 0; i < books.length; i++) {
-            if(books[i] != null){
-                System.out.println(i+1+". " + books[i].toString());
+    public void printListProducts(Product[] products) {
+        for (int i = 0; i < products.length; i++) {
+            if(products[i] != null){
+                System.out.println(i+1+". " + products[i].toString());
             }
         }
     }
-
 }

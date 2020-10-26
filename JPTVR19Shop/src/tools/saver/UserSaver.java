@@ -1,6 +1,7 @@
 package tools.saver;
 
-import entity.Customer;
+import entity.Product;
+import entity.User;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,15 +9,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class CustomerSaver {
+public class UserSaver {
 
-    public void saveCustomers(Customer[] readers) {
+    public void saveUsers(User[] users) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
-            fos = new FileOutputStream("customers");
+            fos = new FileOutputStream("users");
             oos = new ObjectOutputStream(fos);
-            oos.writeObject(readers);
+            oos.writeObject(users);
             oos.flush();
         } catch (FileNotFoundException ex) {
             System.out.println("Не найден файл");
@@ -25,14 +26,14 @@ public class CustomerSaver {
         }
     }
 
-    public Customer[] loadCustomers() {
-        Customer[] customers = new Customer[10];
+    public User[] loadUsers() {
+        User[] users = new User[10];
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
-            fis = new FileInputStream("customers");
+            fis = new FileInputStream("users");
             ois = new ObjectInputStream(fis);
-            customers = (Customer[])ois.readObject();
+            users = (User[]) ois.readObject();
         } catch (FileNotFoundException ex) {
             System.out.println("Не найден файл");
         } catch (IOException ex) {
@@ -40,7 +41,7 @@ public class CustomerSaver {
         } catch (ClassNotFoundException ex) {
             System.out.println("Не найден класс");
         }
-        return customers;
+        return users;
     }
 
 
