@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="JPTVR19WebLibrary:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/JPTVR19WebLibrary_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="JPTVR19WebLibrary" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="JPTVR19WebLibrary/web/Web" />
+    </root>
+  </artifact>
+</component>
